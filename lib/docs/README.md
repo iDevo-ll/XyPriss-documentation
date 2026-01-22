@@ -5,7 +5,7 @@ description: XyPriss Hybrid Server Core (XHSC) - A high-performance, hybrid back
 
 # Introduction to XyPriss
 
-**XyPriss Hybrid Server Core (XHSC)** represents a paradigm shift in backend development. It is a high-performance framework that seamlessly fuses the raw speed of **Rust** with the developer-friendly ecosystem of **Node.js**.
+**XyPriss Hybrid Server Core (XHSC)** represents a paradigm shift in backend development. It is a high-performance framework that seamlessly fuses the raw speed of **[Rust](https://www.rust-lang.org/)** with the developer-friendly ecosystem of **[Node.js](https://nodejs.org/)**.
 
 Designed for improved scalability, XyPriss enables native networking, robust process management (clustering), and advanced traffic guardrails out of the box.
 

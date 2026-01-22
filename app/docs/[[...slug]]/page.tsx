@@ -85,7 +85,7 @@ function renderDoc(doc: any, slugPath: string) {
 
   return (
     <article className="prose prose-zinc dark:prose-invert max-w-none pb-12 documentation-article">
-      <div className="space-y-2 mb-6">
+      {/* <div className="space-y-2 mb-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           {doc.frontmatter.title ||
             doc.slug.split("/").pop().replace(/_/g, " ")}
@@ -96,7 +96,7 @@ function renderDoc(doc: any, slugPath: string) {
           </p>
         )}
         <hr className="my-6 border-zinc-800" />
-      </div>
+      </div> */}
 
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}

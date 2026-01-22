@@ -15,6 +15,7 @@ Before you begin, ensure you have the following installed:
 
 - **Node.js 18** or higher
 - **npm** (or yarn/pnpm)
+- **bun**
 - **TypeScript** (Strongly recommended for the best development experience)
 
 ## Installation
