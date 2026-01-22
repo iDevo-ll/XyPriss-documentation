@@ -1,21 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "./animations.scss";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "XyPriss documentation",
-  description: "Xypriss Documentation made by Nehonix Team",
+  title: "XyPriss - Enterprise-Grade Node.js Web Framework",
+  description:
+    "Hybrid Rust + TypeScript framework bridging the power of Rust with the flexibility of Node.js. Built for performance, security, and scale.",
 };
 
 export default function RootLayout({
@@ -25,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

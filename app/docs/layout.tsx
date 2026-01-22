@@ -2,8 +2,8 @@ import { Sidebar } from "@/components/sidebar";
 import { SiteHeader } from "@/components/site-header";
 
 interface DocsLayoutProps {
-    children: React.ReactNode;
-}
+    children: React.ReactNode; 
+} 
 
 export default function DocsLayout({ children }: DocsLayoutProps) {
     return (

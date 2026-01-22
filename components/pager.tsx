@@ -1,56 +1,52 @@
-"use client";
-
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { docsConfig } from "@/config/docs";
+import { getAllDocs } from "@/lib/doc-helper";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button"; // I don't have this, will use raw classes
 
-export function Pager({ slug }: { slug: string }) {
-    const pager = getPagerForDoc(slug);
-
-    if (!pager) {
-        return null;
-    }
-
-    return (
-        <div className="flex flex-row items-center justify-between pt-6 border-t border-border mt-8">
-            {pager.prev && (
-                <Link
-                    href={pager.prev.href}
-                    className={cn("group flex items-center p-2 rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors mr-auto text-sm font-medium")}
-                >
-                    <ChevronLeft className="mr-2 h-4 w-4" />
-                    {pager.prev.title}
-                </Link>
-            )}
-            {pager.next && (
-                <Link
-                    href={pager.next.href}
-                    className={cn("group flex items-center p-2 rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors ml-auto text-sm font-medium")}
-                >
-                    {pager.next.title}
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                </Link>
-            )}
-        </div>
-    );
+interface PagerProps {
+  slug: string;
 }
 
-function getPagerForDoc(slug: string) {
-    const flattenedLinks = [null, ...docsConfig.sidebarNav.flatMap((section) => section.items || []), null];
-    const activeIndex = flattenedLinks.findIndex((link) => link && link.href === `/docs/${slug}` || link?.href === slug); // slug might have /docs prefix or not depending on passed prop. 
+export function Pager({ slug }: PagerProps) {
+  const docs = getAllDocs();
 
-    // Normalize slug to match hrefs: hrefs are /docs/foo
-    const docPath = `/docs/${slug}`;
-    const index = flattenedLinks.findIndex((link) => link && link.href === docPath);
+  const activeIndex = docs.findIndex((doc) => doc.slug === slug);
 
-    if (index === -1) return null;
+  if (activeIndex === -1) {
+    return null;
+  }
 
-    const prev = flattenedLinks[index - 1];
-    const next = flattenedLinks[index + 1];
-    return {
-        prev,
-        next,
-    };
+  const prev = activeIndex > 0 ? docs[activeIndex - 1] : null;
+  const next = activeIndex < docs.length - 1 ? docs[activeIndex + 1] : null;
+
+  if (!prev && !next) {
+    return null;
+  }
+
+  return (
+    <div className="flex flex-row items-center justify-between mt-10">
+      {prev && (
+        <Link
+          href={`/docs/${prev.slug}`}
+          className={cn(
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 mr-auto",
+          )}
+        >
+          <ChevronLeft className="mr-2 h-4 w-4" />
+          {prev.frontmatter.title || prev.slug}
+        </Link>
+      )}
+      {next && (
+        <Link
+          href={`/docs/${next.slug}`}
+          className={cn(
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 ml-auto",
+          )}
+        >
+          {next.frontmatter.title || next.slug}
+          <ChevronRight className="ml-2 h-4 w-4" />
+        </Link>
+      )}
+    </div>
+  );
 }
