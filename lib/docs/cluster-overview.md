@@ -14,7 +14,7 @@ The XyPriss Hybrid Server Core (XHSC) introduces a modern approach to process ma
 2. **Speed**: Rust-based load balancing strategies (`least-connections`, `latency-aware`) are executed with sub-millisecond overhead.
 3. **Safety**: Integrated Circuit Breakers and Network Quality guardrails protect your application from cascading failures.
 
-## Honest Capabilities
+## Capabilities
 
 While XyPriss is designed for enterprise scale, we believe in transparency regarding current implementation limits:
 

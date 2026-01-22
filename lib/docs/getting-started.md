@@ -32,7 +32,7 @@ npm install xypriss-security
 
 ### TypeScript Setup (Recommended)
 
-Since XyPriss is written in TypeScript and Rust, it provides first-class type definitions. For a new project, we recommend initializing with TypeScript:
+Since XyPriss is written in **[TypeScript](https://www.typescriptlang.org/)** and **[Rust](https://www.rust-lang.org/)**, it provides first-class type definitions. For a new project, we recommend initializing with TypeScript:
 
 ```bash
 npm install -D typescript @types/node ts-node

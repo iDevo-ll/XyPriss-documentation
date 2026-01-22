@@ -28,26 +28,26 @@ export function SiteHeader() {
             <span className="font-mono text-lg font-semibold">XyPriss</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link
+            {/* <Link
               href="#features"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Features
-            </Link>
+            </Link> */}
             <Link
-              href="#quickstart"
+              href="/docs/QUICK_START"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Quick Start
             </Link>
             <Link
-              href="/docs/getting-started"
+              href="/docs"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Docs
             </Link>
             <Link
-              href="#community"
+              href="https://github.com/Nehonix-Team"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Community

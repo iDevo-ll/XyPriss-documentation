@@ -1,13 +1,30 @@
 /* Professional Documentation Styles - Premium Edition */
 
 .documentation-article {
+  /* Dynamic Theme Variables */
   --doc-bg-code: #050505;
-  --doc-border: rgba(255, 255, 255, 0.08);
-  --doc-text-muted: #666;
   --doc-accent: #60a5fa;
   --doc-accent-hover: #3b82f6;
 
-  /* macOS-style Code Blocks avec effets premium */
+  /* Defaults for Light Mode */
+  --doc-text: #111111; /* Near black for better readability */
+  --doc-text-muted: #444444;
+  --doc-heading: #000000;
+  --doc-border: rgba(0, 0, 0, 0.1);
+  --doc-table-bg: rgba(255, 255, 255, 0.5);
+  --doc-table-row-hover: rgba(96, 165, 250, 0.05);
+
+  /* Dark mode overrides */
+  @at-root .dark & {
+    --doc-text: rgba(255, 255, 255, 0.85);
+    --doc-text-muted: rgba(255, 255, 255, 0.6);
+    --doc-heading: #ffffff;
+    --doc-border: rgba(255, 255, 255, 0.08);
+    --doc-table-bg: rgba(10, 10, 10, 0.6);
+    --doc-table-row-hover: rgba(96, 165, 250, 0.08);
+  }
+
+  /* macOS-style Code Blocks - Always Dark (Terminal Style) */
   pre {
     position: relative;
     margin: 2.5rem 0 !important;
@@ -99,18 +116,20 @@
     font-size: 0.9rem;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(96, 165, 250, 0.15);
-    background: linear-gradient(
-      135deg,
-      rgba(10, 10, 10, 0.6) 0%,
-      rgba(5, 5, 5, 0.4) 100%
-    );
+    border: 1px solid var(--doc-border);
+    background: var(--doc-table-bg);
     backdrop-filter: blur(10px);
     box-shadow:
-      0 20px 40px -10px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(96, 165, 250, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      0 20px 40px -10px rgba(0, 0, 0, 0.1),
+      0 0 0 1px var(--doc-border);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @at-root .dark & {
+      box-shadow:
+        0 20px 40px -10px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(96, 165, 250, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
 
     &:hover {
       border-color: rgba(96, 165, 250, 0.25);
@@ -164,13 +183,13 @@
 
     td {
       padding: 1.25rem 1.5rem;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--doc-text);
       font-weight: 500;
       transition: color 0.2s ease;
     }
 
     &:hover td {
-      color: rgba(255, 255, 255, 0.95);
+      color: var(--doc-heading);
     }
   }
 
@@ -221,10 +240,7 @@
     font-weight: 900 !important;
     margin-top: 4.5rem !important;
     margin-bottom: 1.5rem !important;
-    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--doc-heading) !important;
     position: relative;
     padding-bottom: 0.5rem;
     transition: all 0.3s ease;
@@ -251,7 +267,7 @@
     font-weight: 800 !important;
     margin-top: 3rem !important;
     margin-bottom: 1rem !important;
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: var(--doc-heading) !important;
     position: relative;
     padding-left: 1rem;
     transition: all 0.3s ease;
@@ -287,13 +303,13 @@
   p,
   li {
     font-size: 1rem !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: var(--doc-text) !important;
     line-height: 1.85 !important;
     font-weight: 450 !important;
     transition: color 0.2s ease;
 
     &:hover {
-      color: rgba(255, 255, 255, 0.85) !important;
+      color: var(--doc-heading) !important;
     }
   }
 
@@ -339,12 +355,29 @@
     }
   }
 
-  /* Animations globales */
+  /* Global Animations */
   * {
     &:focus-visible {
       outline: 2px solid var(--doc-accent);
       outline-offset: 2px;
       border-radius: 4px;
     }
+  }
+
+  /* Keyword Highlight Effect */
+  .kw-highlight {
+    background: rgba(96, 165, 250, 0.3) !important;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+    animation: kw-pulse 12s infinite alternate;
+  }
+}
+
+@keyframes kw-pulse {
+  from {
+    box-shadow: 0 0 5px rgba(96, 165, 250, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
   }
 }

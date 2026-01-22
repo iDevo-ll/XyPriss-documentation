@@ -2,7 +2,8 @@
 
 // Floating animation
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -12,7 +13,8 @@
 
 // Pulse glow effect
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(34, 76, 152, 0.3);
   }
   50% {
@@ -97,7 +99,8 @@
 
 // Bounce subtle
 @keyframes bounce-subtle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -107,7 +110,8 @@
 
 // Glow pulse
 @keyframes glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     filter: drop-shadow(0 0 5px rgba(34, 76, 152, 0.5));
   }
   50% {
@@ -135,7 +139,8 @@
 
 // Wave effect
 @keyframes wave {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
   }
   25% {
@@ -201,8 +206,10 @@
 
 // Hover effects
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -211,7 +218,7 @@
 
 .hover-scale {
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: scale(1.05);
   }
@@ -219,7 +226,7 @@
 
 .hover-glow {
   transition: filter 0.3s ease;
-  
+
   &:hover {
     filter: drop-shadow(0 0 15px rgba(34, 76, 152, 0.6));
   }
@@ -251,7 +258,7 @@
   background: radial-gradient(circle, rgba(34, 76, 152, 0.8), transparent);
   border-radius: 50%;
   animation: particles-float linear infinite;
-  
+
   @for $i from 1 through 20 {
     &:nth-child(#{$i}) {
       left: #{random(100)}%;
@@ -279,9 +286,9 @@
 .code-shimmer {
   position: relative;
   overflow: hidden;
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -295,7 +302,7 @@
     );
     transition: left 0.5s ease;
   }
-  
+
   &:hover::before {
     left: 100%;
   }
@@ -304,8 +311,118 @@
 // Perspective tilt effect
 .perspective-tilt {
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
   }
+}
+// Cosmic Background Effect
+.cosmic-universe {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  background: radial-gradient(circle at top, #0c0f1d 0%, #020205 100%);
+  transition: background 1s ease;
+
+  @at-root .light & {
+    background: radial-gradient(circle at top, #f0f7ff 0%, #ffffff 100%);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, #fff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 50px 160px, #fff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 160px 120px, #fff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.3;
+    animation: stars-drift 100s linear infinite;
+
+    @at-root .light & {
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, #60a5fa, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #60a5fa, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50px 160px, #60a5fa, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #3b82f6, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #3b82f6, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 160px 120px, #3b82f6, rgba(0, 0, 0, 0));
+      opacity: 0.15;
+    }
+  }
+
+  .nebula {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(96, 165, 250, 0.08),
+      transparent 50%
+    );
+    filter: blur(80px);
+    animation: nebula-rotate 30s ease-in-out infinite alternate;
+
+    @at-root .light & {
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba(96, 165, 250, 0.1),
+        transparent 60%
+      );
+    }
+  }
+}
+
+@keyframes stars-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-200px);
+  }
+}
+
+@keyframes nebula-rotate {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.2) rotate(10deg);
+  }
+}
+
+// Unified Section Transition
+.unified-section {
+  position: relative;
+  background-color: transparent;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--doc-border),
+      transparent
+    );
+    opacity: 0.5;
+  }
+}
+
+// Global Animations Utility updates
+.animate-star-field {
+  @extend .cosmic-universe;
 }

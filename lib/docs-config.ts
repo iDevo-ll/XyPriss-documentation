@@ -86,4 +86,8 @@ export const docsConfig = [
       { title: "XFPM", href: "/docs/xfpm" },
     ],
   },
+  {
+    title: "Community",
+    items: [{ title: "Contributing", href: "/docs/contributing" }],
+  },
 ];

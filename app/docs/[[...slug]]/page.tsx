@@ -7,6 +7,7 @@ import "highlight.js/styles/tokyo-night-dark.css";
 import { Metadata } from "next";
 import { Pager } from "@/components/pager";
 import Link from "next/link";
+import { SearchHighlight } from "@/components/search-highlight";
 
 interface DocPageProps {
   params: Promise<{
@@ -99,6 +100,7 @@ function renderDoc(doc: any, slugPath: string) {
         <hr className="my-6 border-zinc-800" />
       </div> */}
 
+      <SearchHighlight />
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight]}
