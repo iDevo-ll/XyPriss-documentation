@@ -16,7 +16,7 @@ import { fadeInUp, staggerContainer } from "./animations";
 export function FeaturesSection() {
   return (
     <section
-      className="bg-gradient-to-b from-muted/30 to-background py-20"
+      className="unified-section py-24 relative overflow-hidden"
       id="features"
     >
       <div className="container mx-auto px-4">

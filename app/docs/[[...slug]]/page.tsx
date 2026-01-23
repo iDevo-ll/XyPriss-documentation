@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+
+export const revalidate = 14400; // 4 hours
 import { getAllDocs, getDocBySlug } from "@/lib/doc-helper";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
@@ -29,7 +31,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: doc.frontmatter.title || doc.slug,
+    title: "XyPriss - " + (doc.frontmatter.title || doc.slug),
     description: doc.frontmatter.description || "XYPriss Documentation",
   };
 }

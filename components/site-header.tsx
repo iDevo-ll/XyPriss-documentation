@@ -19,7 +19,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/xypriss-logo.png"
+              src="https://dll.nehonix.com/assets/xypriss/file_0000000083bc71f4998cbc2f4f0c9629.png"
               alt="XyPriss"
               width={32}
               height={32}
@@ -65,6 +65,7 @@ export function SiteHeader() {
               href="https://github.com/Nehonix-Team/XyPriss"
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center"
             >
               <Github className="h-4 w-4" />
               <span className="hidden sm:inline ml-2">GitHub</span>

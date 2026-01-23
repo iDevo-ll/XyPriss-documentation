@@ -14,7 +14,10 @@ import { fadeInUp, staggerContainer } from "./animations";
 
 export function QuickStartSection() {
   return (
-    <section className="py-20" id="quickstart">
+    <section
+      className="unified-section py-24 relative overflow-hidden"
+      id="quickstart"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"

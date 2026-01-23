@@ -7,9 +7,7 @@ import { fadeInUp, staggerContainer } from "./animations";
 
 export function PlatformSupportSection() {
   return (
-    <section className="border-y border-border bg-muted/30 py-16 relative overflow-hidden">
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-shimmer" />
+    <section className="unified-section py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"

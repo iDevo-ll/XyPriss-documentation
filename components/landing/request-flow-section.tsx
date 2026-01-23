@@ -7,7 +7,7 @@ import { fadeInUp, staggerContainer } from "./animations";
 
 export function RequestFlowSection() {
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
+    <section className="unified-section py-24 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-glow" />
       <div

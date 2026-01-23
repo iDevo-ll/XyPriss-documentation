@@ -6,7 +6,10 @@ import { fadeInUp, staggerContainer } from "./animations";
 
 export function DocsSection() {
   return (
-    <section className="bg-muted/30 py-20" id="docs">
+    <section
+      className="unified-section py-24 relative overflow-hidden"
+      id="docs"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -32,7 +35,7 @@ export function DocsSection() {
                   title: "Quick Start Guide",
                   href: "/docs/getting-started",
                 },
-                { title: "XFPM Guide", href: "/docs/xfpm" },
+                { title: "XFPM Guide", href: "/docs/xfpm?kw=XFPM%20is" },
                 { title: "Examples", href: "/docs/examples" },
                 {
                   title: "Features Overview",

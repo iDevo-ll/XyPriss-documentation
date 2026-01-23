@@ -14,7 +14,10 @@ import { fadeInUp, staggerContainer } from "./animations";
 
 export function CommunitySection() {
   return (
-    <section className="py-20" id="community">
+    <section
+      className="unified-section py-24 relative overflow-hidden"
+      id="community"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"

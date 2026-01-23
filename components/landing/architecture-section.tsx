@@ -13,7 +13,10 @@ import { fadeInUp, staggerContainer } from "./animations";
 
 export function ArchitectureSection() {
   return (
-    <section className="py-20" id="architecture">
+    <section
+      className="unified-section py-24 relative overflow-hidden"
+      id="architecture"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
