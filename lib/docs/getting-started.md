@@ -325,7 +325,7 @@ Create `xypriss.config.json`:
   "$internal": {
     "$plg": {
       "__meta__": {
-        "path": "#$./plugin/directory" // [#!] Learn more about the workspace [<link to="https://xypriss.nehonix.com/docs/WORKSPACE_SYSTEM?kw=Project+Root+Resolution">system</link>]
+        "path": "#$./plugin/directory" // [#!] Learn more about the workspace <link to="https://xypriss.nehonix.com/docs/WORKSPACE_SYSTEM?kw=Project+Root+Resolution">system</link>
       },
       "__xfs__": {
         "path": "$#./path/to/xfs/directory"
