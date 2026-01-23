@@ -62,13 +62,13 @@ export function SiteHeader() {
           </Button>
           <Button variant="ghost" size="sm" asChild>
             <a
-              href="https://github.com/Nehonix-Team/XyPriss"
+              href="https://github.com/Nehonix-Team/XyPriss-documentation"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center"
             >
               <Github className="h-4 w-4" />
-              <span className="hidden sm:inline ml-2">GitHub</span>
+              <span className="hidden sm:inline ml-2">Edit this page</span>
             </a>
           </Button>
           <Button size="sm" asChild>
