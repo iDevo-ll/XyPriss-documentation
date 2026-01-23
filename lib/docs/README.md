@@ -49,7 +49,7 @@ import { createServer } from "xypriss";
 const app = createServer({
   cluster: {
     enabled: true,
-    workers: "auto", // Automatically detects available cores
+    workers: "auto", // Clique to learn more [!#workspace::Automatically detects available cores]
     strategy: "least-connections",
   },
   requestManagement: {

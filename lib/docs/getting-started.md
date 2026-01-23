@@ -339,7 +339,7 @@ Create `xypriss.config.json`:
     "__description__": "A starter XyPriss server for building secure web applications",
     "__name__": "my-app",
     "__port__": 4567,
-    "__version__": "1.0.0"
+    "__version__": "1.0.0" 
   }
 }
 ```
