@@ -29,18 +29,61 @@ function extractText(node: any): string {
 }
 
 /**
- * Helper to recursively find and style internal comments {# ... #}
+ * Helper to recursively find and style internal comments [#! ... !#] or [#!] ...
  */
 function processInternalComments(children: React.ReactNode): React.ReactNode {
   return React.Children.map(children, (child) => {
     if (!child) return child;
-    if (typeof child === "string" && child.includes("{#")) {
-      const parts = child.split(/(\{#[\s\S]*?#\})/g);
+    if (typeof child === "string" && child.includes("[#!]")) {
+      const parts = child.split(/(\[#!\][\s\S]*?(?:!#|\n|$))/g);
       return parts.map((part, i) => {
-        if (part.startsWith("{#") && part.endsWith("#}")) {
+        if (part.startsWith("[#!]")) {
+          let content = part.slice(4);
+          if (content.endsWith("!#")) content = content.slice(0, -2);
+          if (content.endsWith("\n")) content = content.slice(0, -1);
+
+          // Parse <link to="...">label</link>
+          const finalContent = content
+            .trim()
+            .split(/(<link to="[^"]+">.*?<\/link>)/g);
+          const renderedContent = finalContent.map((item, j) => {
+            const linkMatch = item.match(
+              /<link to="([^"]+)">([\s\S]*?)<\/link>/,
+            );
+            if (linkMatch) {
+              const url = linkMatch[1];
+              const label = linkMatch[2];
+              const isExternal = url.startsWith("http");
+
+              if (isExternal) {
+                return (
+                  <a
+                    key={j}
+                    href={url}
+                    target="_blank"
+                    rel="noopener"
+                    className="underline decoration-dotted hover:decoration-solid transition-all cursor-pointer pointer-events-auto inline-block mx-1"
+                  >
+                    {label}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={j}
+                  href={url}
+                  className="underline decoration-dotted hover:decoration-solid transition-all cursor-pointer pointer-events-auto inline-block mx-1"
+                >
+                  {label}
+                </Link>
+              );
+            }
+            return item;
+          });
+
           return (
             <span key={i} className="internal-comment">
-              {part.slice(2, -2)}
+              {renderedContent}
             </span>
           );
         }
@@ -127,7 +170,7 @@ function CodeBlockWrapper({
 
   // Strip internal comments from the copy buffer
   const cleanCode = React.useMemo(() => {
-    return code.replace(/\{#[\s\S]*?#\}/g, "").trim();
+    return code.replace(/\[#!\][\s\S]*?(?:!#|\n|$)/g, "").trim();
   }, [code]);
 
   const copyToClipboard = async () => {
