@@ -123,14 +123,17 @@ export function HeroSection() {
           </motion.div>
 
           <div className="mb-6 space-y-2">
+            <h1 className="sr-only">
+              XyPriss - Enterprise-Grade Hybrid Rust + TypeScript Web Framework
+            </h1>
             <TypewriterText
-              text="Enterprise-Grade"
-              className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+              text="XyPriss Framework"
+              className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-primary"
               delay={0.5}
             />
             <div className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               <TypewriterText
-                text="Node.js Web Framework"
+                text="Hybrid Rust + TypeScript"
                 className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-shift"
                 delay={1.2}
               />

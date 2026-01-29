@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const docs = getAllDocs();
 
   const docEntries = docs.map((doc) => ({
-    url: `${baseUrl}/docs/${doc.slug}`,
+    url: `${baseUrl}/docs${doc.slug ? `/${doc.slug}` : ""}`,
     lastModified: new Date(),
     changeFrequency: "hourly" as const,
     priority: 0.8,

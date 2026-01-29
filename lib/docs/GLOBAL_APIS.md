@@ -45,7 +45,7 @@ const apiKey = __sys__.__ENV__.get("API_KEY", "default_value");
 // Existence verification
 if (__sys__.__ENV__.has("DATABASE_URL")) {
     // Logic for database initialization
-}
+} 
 ```
 
 ### Advanced System Capabilities

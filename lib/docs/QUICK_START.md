@@ -4,32 +4,42 @@ Get started with XyPriss in a few simple steps.
 
 ## Installation
 
+Recommented (using XyPriss CLI):
+
 ```bash
-xfpm i xypriss
+xyp install xypriss
+```
+
+Alternatively, using standard package managers:
+
+```bash
+npm install xypriss
+# or
+yarn add xypriss
 ```
 
 For additional security features:
 
 ```bash
-xfpm i xypriss-security
+xyp install xypriss-security
 ```
 
 ---
 
 ## Method 1: Using XyPriss CLI (Recommended)
 
-The CLI provides the fastest way to initialize a new project with best practices:
+The CLI provides the fastest way to initialize a new project. Refer to the [**Installation Guide**](./INSTALLATION.md) for detailed instructions.
 
 ```bash
-# Install the CLI globally
-npm install -g xypriss-cli
+# Example (Unix/macOS)
+curl -sL https://xypriss.nehonix.com/install.js | node
 
 # Create a new project
-xypcli init
+xyp init
 
 # Start development
 cd your-project-name
-xfpm dev
+npm run dev
 ```
 
 The CLI automatically generates:
@@ -55,7 +65,7 @@ const server = createServer({
 });
 
 server.get("/", (req, res) => {
-  res.xJson({ message: "Server running" });
+  res.json({ message: "Server running" });
 });
 
 server.start(() => {
@@ -72,7 +82,7 @@ const app = createServer();
 const userRouter = Router();
 
 userRouter.get("/:id", (req, res) => {
-  res.xJson({ userId: req.params.id });
+  res.json({ userId: req.params.id });
 });
 
 app.use("/api/users", userRouter);
@@ -95,7 +105,7 @@ const upload = new FileUploadAPI();
 await upload.initialize(app.configs?.fileUpload);
 
 app.post("/upload", upload.single("file"), (req, res) => {
-  res.xJson({ success: true, file: req.file });
+  res.json({ success: true, file: req.file });
 });
 
 app.start();
@@ -137,11 +147,11 @@ const app = createServer({
 });
 
 app.get("/api/users", (req, res) => {
-  res.xJson({ users: [] });
+  res.json({ users: [] });
 });
 
 app.post("/api/users", (req, res) => {
-  res.xJson({ created: true });
+  res.json({ created: true });
 });
 
 app.start();
@@ -169,7 +179,7 @@ const app = createServer({
   },
 });
 
-await app.startAllServers(); // or just use the ".start()" method
+await app.startAllServers();
 ```
 
 ### Production Deployment with XyNginC

@@ -470,6 +470,57 @@ export function CodeBlock({
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              h1: ({ children, ...props }) => {
+                const id = React.Children.toArray(children)
+                  .join("")
+                  .toLowerCase()
+                  .replace(/\s+/g, "-");
+                return (
+                  <h1 id={id} {...props} className="scroll-mt-24 group">
+                    {children}{" "}
+                    <a
+                      href={`#${id}`}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-primary/40 hover:text-primary"
+                    >
+                      #
+                    </a>
+                  </h1>
+                );
+              },
+              h2: ({ children, ...props }) => {
+                const id = React.Children.toArray(children)
+                  .join("")
+                  .toLowerCase()
+                  .replace(/\s+/g, "-");
+                return (
+                  <h2 id={id} {...props} className="scroll-mt-24 group">
+                    {children}{" "}
+                    <a
+                      href={`#${id}`}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-primary/40 hover:text-primary"
+                    >
+                      #
+                    </a>
+                  </h2>
+                );
+              },
+              h3: ({ children, ...props }) => {
+                const id = React.Children.toArray(children)
+                  .join("")
+                  .toLowerCase()
+                  .replace(/\s+/g, "-");
+                return (
+                  <h3 id={id} {...props} className="scroll-mt-24 group">
+                    {children}{" "}
+                    <a
+                      href={`#${id}`}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-primary/40 hover:text-primary"
+                    >
+                      #
+                    </a>
+                  </h3>
+                );
+              },
               a: ({ href, children }) => {
                 const isExternal = href?.startsWith("http");
                 if (isExternal)

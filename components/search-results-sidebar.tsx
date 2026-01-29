@@ -91,15 +91,15 @@ export function SearchResultsSidebar() {
       {/* Results List */}
       <div className="flex-1 overflow-y-auto p-6 space-y-10 scrollbar-none">
         <AnimatePresence mode="popLayout">
-          {results.map((result, idx) => (
+          {results.map((result: SearchResult, idx: number) => (
             <motion.div
-              key={result.slug}
+              key={`${result.slug}-${idx}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.04, type: "spring", damping: 20 }}
             >
               <Link
-                href={`/docs/${result.slug}?q=${encodeURIComponent(query!)}&kw=${encodeURIComponent(query!)}`}
+                href={`/docs/${result.slug}${result.slug ? "" : ""}?q=${encodeURIComponent(query!)}&kw=${encodeURIComponent(query!)}`}
                 className="group block space-y-3"
               >
                 <div className="flex items-center justify-between gap-4">
@@ -118,7 +118,7 @@ export function SearchResultsSidebar() {
                 <div className="flex items-center gap-3">
                   <div className="h-[1px] flex-1 bg-gradient-to-r from-white/5 to-transparent" />
                   <span className="text-[8px] text-zinc-600 font-mono tracking-tighter uppercase whitespace-nowrap bg-zinc-950/50 px-2 py-0.5 rounded-full border border-white/5">
-                    {result.slug.replace(/\//g, " → ")}
+                    {result.slug ? result.slug.replace(/\//g, " → ") : "Index"}
                   </span>
                 </div>
               </Link>

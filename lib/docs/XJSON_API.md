@@ -88,7 +88,7 @@ $ curl http://localhost:8085/api/data.xJson
 
 ## API Reference
 
-### res.xJson(data, options?)
+### (res as any).xJson(data, options?)
 
 The main method for sending XJson responses.
 
@@ -343,7 +343,7 @@ app.get("/complex", (req, res) => {
 2. **Configure streaming for very large responses**
 
    ```typescript
-   res.xJson(largeData, {
+   (res as any).xJson(largeData, {
      enableStreaming: true,
      chunkSize: 1024 * 256, // 256KB chunks
    });
@@ -352,7 +352,7 @@ app.get("/complex", (req, res) => {
 3. **Set appropriate depth limits**
 
    ```typescript
-   res.xJson(data, {
+   (res as any).xJson(data, {
      maxDepth: 10, // Prevent excessive nesting
    });
    ```

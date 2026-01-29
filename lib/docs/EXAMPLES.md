@@ -231,7 +231,7 @@ app.get("/", (req, res) => {
   res.xJson({ message: "Public homepage" });
 });
 
-await app.startAllServers();
+await app.start();
 ```
 
 ---
@@ -322,7 +322,7 @@ app.use("/api/*", (req, res, next) => {
 
 ## Production Deployment
 
-### With XyNginC (Automated Nginx + SSL)
+### With [XyNginC](https://github.com/Nehonix-Team/xynginc) (Automated Nginx + SSL)
 
 ```typescript
 import { createServer } from "xypriss";
@@ -350,10 +350,6 @@ const app = createServer({
             email: "admin@example.com",
           },
         ],
-        nginx: {
-          clientMaxBodySize: "50M",
-          proxyTimeout: 60,
-        },
       }),
     ],
   },
@@ -369,7 +365,6 @@ const app = createServer({
   cluster: {
     enabled: true,
     workers: "auto", // Use all CPU cores
-    respawn: true,
   },
   cache: {
     strategy: "redis",
@@ -410,70 +405,10 @@ app.start();
 
 ---
 
-## Advanced Examples
-
-### WebSocket Integration
-
-```typescript
-import { createServer } from "xypriss";
-import { Server as SocketIO } from "socket.io";
-
-const app = createServer();
-const httpServer = app.getHttpServer();
-const io = new SocketIO(httpServer);
-
-io.on("connection", (socket) => {
-  console.log("Client connected");
-
-  socket.on("message", (data) => {
-    io.emit("message", data);
-  });
-});
-
-app.start();
-```
-
-### Database Integration (MongoDB)
-
-```typescript
-import { createServer } from "xypriss";
-import mongoose from "mongoose";
-
-const app = createServer();
-
-// Connect to MongoDB
-await mongoose.connect(process.env.MONGODB_URI);
-
-// Define schema
-const UserSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-});
-
-const User = mongoose.model("User", UserSchema);
-
-// Routes
-app.get("/api/users", async (req, res) => {
-  const users = await User.find();
-  res.xJson({ users });
-});
-
-app.post("/api/users", async (req, res) => {
-  const user = new User(req.body);
-  await user.save();
-  res.xJson({ user });
-});
-
-app.start();
-```
-
----
-
 ## Additional Resources
 
 For more examples and detailed documentation:
 
-- [GitHub Repository Examples](https://github.com/Nehonix-Team/XyPriss/tree/main/examples)
 - [Complete Documentation](../docs/)
 - [API Reference](../docs/api-reference.md)
 

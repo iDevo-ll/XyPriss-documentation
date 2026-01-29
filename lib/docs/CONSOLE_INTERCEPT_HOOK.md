@@ -6,11 +6,11 @@ The `onConsoleIntercept` hook is a **privileged plugin hook** that allows plugin
 
 ## Why Use This Hook?
 
--   **Centralized Log Management**: Capture all console output in one place
--   **External Monitoring**: Send logs to external services (Sentry, DataDog, etc.)
--   **Custom Analytics**: Analyze log patterns and trends
--   **Security Auditing**: Track and audit system-level errors
--   **Real-time Alerts**: Trigger alerts based on specific log patterns
+- **Centralized Log Management**: Capture all console output in one place
+- **External Monitoring**: Send logs to external services (Sentry, DataDog, etc.)
+- **Custom Analytics**: Analyze log patterns and trends
+- **Security Auditing**: Track and audit system-level errors
+- **Real-time Alerts**: Trigger alerts based on specific log patterns
 
 ## Security & Permissions
 
@@ -20,10 +20,10 @@ The `onConsoleIntercept` hook is a **privileged plugin hook** that allows plugin
 
 Console logs can contain:
 
--   Sensitive user data
--   API keys or credentials
--   Internal system information
--   Stack traces with code details
+- Sensitive user data
+- API keys or credentials
+- Internal system information
+- Stack traces with code details
 
 ### Requirements
 
@@ -40,11 +40,11 @@ To use this hook, you must:
 import { createServer } from "xypriss";
 
 const app = createServer({
-    logging: {
-        consoleInterception: {
-            enabled: true, // Enable the interception system
-        },
+  logging: {
+    consoleInterception: {
+      enabled: true, // Enable the interception system
     },
+  },
 });
 ```
 
@@ -54,19 +54,19 @@ const app = createServer({
 import { createServer } from "xypriss";
 
 const app = createServer({
-    logging: {
-        consoleInterception: {
-            enabled: true,
-        },
+  logging: {
+    consoleInterception: {
+      enabled: true,
     },
-    pluginPermissions: [
-        {
-            name: "my-log-plugin", // Your plugin name
-            allowedHooks: [
-                "PLG.LOGGING.CONSOLE_INTERCEPT", // Grant permission
-            ],
-        },
-    ],
+  },
+  pluginPermissions: [
+    {
+      name: "my-log-plugin", // Your plugin name
+      allowedHooks: [
+        "PLG.LOGGING.CONSOLE_INTERCEPT", // Grant permission
+      ],
+    },
+  ],
 });
 ```
 
@@ -76,13 +76,13 @@ const app = createServer({
 import { Plugin } from "xypriss";
 
 Plugin.register({
-    name: "my-log-plugin",
-    version: "1.0.0",
+  name: "my-log-plugin",
+  version: "1.0.0",
 
-    onConsoleIntercept(log) {
-        // Your custom logic here
-        console.log(`Intercepted: ${log.method} - ${log.args.join(" ")}`);
-    },
+  onConsoleIntercept(log) {
+    // Your custom logic here
+    console.log(`Intercepted: ${log.method} - ${log.args.join(" ")}`);
+  },
 });
 ```
 
@@ -96,30 +96,30 @@ onConsoleIntercept(log: InterceptedConsoleCall): void | Promise<void>
 
 ```typescript
 interface InterceptedConsoleCall {
-    method: "log" | "info" | "warn" | "error" | "debug" | "trace";
-    args: any[];
-    timestamp: Date;
-    category: "userApp" | "system" | "unknown";
-    level: "info" | "warn" | "error" | "debug";
-    source?: {
-        file?: string;
-        line?: number;
-        column?: number;
-    };
+  method: "log" | "info" | "warn" | "error" | "debug" | "trace";
+  args: any[];
+  timestamp: Date;
+  category: "userApp" | "system" | "unknown";
+  level: "info" | "warn" | "error" | "debug";
+  source?: {
+    file?: string;
+    line?: number;
+    column?: number;
+  };
 }
 ```
 
 ### Properties Explained
 
--   **method**: The console method that was called
--   **args**: Array of arguments passed to the console call
--   **timestamp**: When the log was generated
--   **category**: Classification of the log source
-    -   `userApp`: Logs from your application code
-    -   `system`: Logs from XyPriss internals
-    -   `unknown`: Unable to classify
--   **level**: Severity level of the log
--   **source**: (Optional) Source code location if tracing is enabled
+- **method**: The console method that was called
+- **args**: Array of arguments passed to the console call
+- **timestamp**: When the log was generated
+- **category**: Classification of the log source
+  - `userApp`: Logs from your application code
+  - `system`: Logs from XyPriss internals
+  - `unknown`: Unable to classify
+- **level**: Severity level of the log
+- **source**: (Optional) Source code location if tracing is enabled
 
 ## Usage Examples
 
@@ -208,12 +208,6 @@ interface InterceptedConsoleCall {
             this.flushLogs();
         }
     },
-
-    flushLogs() {
-        // Send batch to external service
-        externalService.sendBatch(this.logs);
-        this.logs = [];
-    }
 }
 ```
 
@@ -328,10 +322,10 @@ but permission was denied (privileged hook requires explicit allowance).
 
 ```typescript
 pluginPermissions: [
-    {
-        name: "my-plugin",
-        allowedHooks: ["PLG.LOGGING.CONSOLE_INTERCEPT"],
-    },
+  {
+    name: "my-plugin",
+    allowedHooks: ["PLG.LOGGING.CONSOLE_INTERCEPT"],
+  },
 ];
 ```
 
@@ -344,75 +338,55 @@ import { createServer, Plugin } from "xypriss";
 
 // Define the plugin
 Plugin.register({
-    name: "log-monitor",
-    version: "1.0.0",
-    description: "Monitors and analyzes console logs",
+  name: "log-monitor",
+  version: "1.0.0",
+  description: "Monitors and analyzes console logs",
 
-    // Statistics
-    stats: {
-        totalLogs: 0,
-        errorCount: 0,
-        warnCount: 0,
-    },
+  // Statistics
+  stats: {
+    totalLogs: 0,
+    errorCount: 0,
+    warnCount: 0,
+  },
 
-    onServerStart() {
-        console.log("[LogMonitor] Started monitoring console logs");
-    },
+  onServerStart() {
+    console.log("[LogMonitor] Started monitoring console logs");
+  },
 
-    onConsoleIntercept(log) {
-        // Update statistics
-        this.stats.totalLogs++;
+  onConsoleIntercept(log) {
+    // Update statistics
+    this.stats.totalLogs++;
 
-        if (log.method === "error") {
-            this.stats.errorCount++;
-            this.handleError(log);
-        } else if (log.method === "warn") {
-            this.stats.warnCount++;
-        }
+    if (log.method === "error") {
+      this.stats.errorCount++;
+      this.handleError(log);
+    } else if (log.method === "warn") {
+      this.stats.warnCount++;
+    }
 
-        // Log to external service
-        if (log.category === "userApp") {
-            this.sendToExternalService(log);
-        }
-    },
-
-    handleError(log) {
-        // Send critical errors to monitoring service
-        if (log.category === "system") {
-            // Alert the team
-            this.sendAlert({
-                severity: "critical",
-                message: log.args.join(" "),
-                timestamp: log.timestamp,
-            });
-        }
-    },
-
-    sendToExternalService(log) {
-        // Implementation here
-    },
-
-    sendAlert(alert) {
-        // Implementation here
-    },
+    // Log to external service
+    if (log.category === "userApp") {
+      this.sendToExternalService(log);
+    }
+  },
 });
 
 // Create server with plugin enabled
 const app = createServer({
-    logging: {
-        consoleInterception: {
-            enabled: true,
-        },
+  logging: {
+    consoleInterception: {
+      enabled: true,
     },
-    pluginPermissions: [
-        {
-            name: "log-monitor",
-            allowedHooks: [
-                "PLG.LOGGING.CONSOLE_INTERCEPT",
-                "PLG.LIFECYCLE.SERVER_START",
-            ],
-        },
-    ],
+  },
+  pluginPermissions: [
+    {
+      name: "log-monitor",
+      allowedHooks: [
+        "PLG.LOGGING.CONSOLE_INTERCEPT",
+        "PLG.LIFECYCLE.SERVER_START",
+      ],
+    },
+  ],
 });
 
 await app.start();
@@ -420,10 +394,10 @@ await app.start();
 
 ## Related Documentation
 
--   [Plugin Core Hooks](./PLUGIN_CORE_HOOKS.md) - All available plugin hooks
--   [Console Interception Guide](./CONSOLE_INTERCEPTION_GUIDE.md) - Console interception system details
--   [Plugin Permissions](./PLUGIN_PERMISSIONS.md) - Plugin permission system
--   [Plugin Development Guide](./PLUGIN_DEVELOPMENT_GUIDE.md) - Complete plugin development guide
+- [Plugin Core Hooks](./PLUGIN_CORE_HOOKS.md) - All available plugin hooks
+- [Console Interception Guide](./CONSOLE_INTERCEPTION_GUIDE.md) - Console interception system details
+- [Plugin Permissions](./PLUGIN_PERMISSIONS.md) - Plugin permission system
+- [Plugin Development Guide](./PLUGIN_DEVELOPMENT_GUIDE.md) - Complete plugin development guide
 
 ## Troubleshooting
 
@@ -431,29 +405,29 @@ await app.start();
 
 1. **Check if console interception is enabled**:
 
-    ```typescript
-    logging: {
-        consoleInterception: {
-            enabled: true;
-        }
-    }
-    ```
+   ```typescript
+   logging: {
+     consoleInterception: {
+       enabled: true;
+     }
+   }
+   ```
 
 2. **Verify plugin has permission**:
 
-    ```typescript
-    pluginPermissions: [
-        {
-            name: "your-plugin",
-            allowedHooks: ["PLG.LOGGING.CONSOLE_INTERCEPT"],
-        },
-    ];
-    ```
+   ```typescript
+   pluginPermissions: [
+     {
+       name: "your-plugin",
+       allowedHooks: ["PLG.LOGGING.CONSOLE_INTERCEPT"],
+     },
+   ];
+   ```
 
 3. **Check plugin is registered**:
-    ```typescript
-    Plugin.register({ name: "your-plugin", onConsoleIntercept(log) { ... } })
-    ```
+   ```typescript
+   Plugin.register({ name: "your-plugin", onConsoleIntercept(log) { ... } })
+   ```
 
 ### Performance Issues
 
@@ -464,53 +438,23 @@ If you notice performance degradation:
 3. **Add filtering** - Only process logs you need
 4. **Batch operations** - Collect logs and process in batches
 
-### Memory Leaks
-
-If storing logs in memory:
-
-1. **Implement a buffer limit**
-2. **Flush regularly**
-3. **Use a circular buffer**
-
-```typescript
-{
-    name: "buffered-logger",
-    buffer: [] as InterceptedConsoleCall[],
-    maxBufferSize: 1000,
-
-    onConsoleIntercept(log) {
-        this.buffer.push(log);
-
-        if (this.buffer.length >= this.maxBufferSize) {
-            this.flush();
-        }
-    },
-
-    flush() {
-        // Process and clear buffer
-        this.processLogs(this.buffer);
-        this.buffer = [];
-    }
-}
-```
 
 ## Summary
 
 The `onConsoleIntercept` hook provides powerful capabilities for:
 
--   ✅ Centralized log management
--   ✅ External monitoring integration
--   ✅ Custom analytics and reporting
--   ✅ Security auditing
--   ✅ Real-time alerting
+- ✅ Centralized log management
+- ✅ External monitoring integration
+- ✅ Custom analytics and reporting
+- ✅ Security auditing
+- ✅ Real-time alerting
 
 Remember to:
 
--   Enable console interception in server config
--   Grant explicit permission to your plugin
--   Keep your implementation performant
--   Avoid infinite loops with console.log
--   Handle errors gracefully
+- Enable console interception in server config
+- Grant explicit permission to your plugin
+- Keep your implementation performant
+- Avoid infinite loops with console.log
+- Handle errors gracefully
 
 For more information, see the [Plugin Core Hooks documentation](./PLUGIN_CORE_HOOKS.md).
-

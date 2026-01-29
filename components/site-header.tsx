@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import * as React from "react";
 import { Github, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
+import { SearchBar } from "./search-bar";
 
 export function SiteHeader() {
   const { theme, setTheme } = useTheme();
@@ -28,12 +30,6 @@ export function SiteHeader() {
             <span className="font-mono text-lg font-semibold">XyPriss</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            {/* <Link
-              href="#features"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Features
-            </Link> */}
             <Link
               href="/docs/QUICK_START"
               className="text-muted-foreground transition-colors hover:text-foreground"
@@ -54,6 +50,17 @@ export function SiteHeader() {
             </Link>
           </nav>
         </div>
+
+        <div className="hidden sm:flex flex-1 justify-center px-6">
+          <React.Suspense
+            fallback={
+              <div className="h-9 w-full max-w-sm bg-zinc-900/50 rounded-full animate-pulse" />
+            }
+          >
+            <SearchBar />
+          </React.Suspense>
+        </div>
+
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" onClick={toggleTheme}>
             <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

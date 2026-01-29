@@ -71,7 +71,6 @@ xfpm dev
 Join our community to discuss features, ask questions, and connect with other XyPriss developers:
 
 - **GitHub Discussions**: [Join the conversation](https://github.com/Nehonix-Team/discussions)
-- **Discord**: [Coming Soon]
 
 ---
 

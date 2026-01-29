@@ -38,9 +38,9 @@ npm run install-memory-cli
 ### Skip Binary Download (not recommanded)
 
 ```bash
-CI=true npm install
+CI=true xfpm i xypriss
 # or
-SKIP_BINARY_DOWNLOAD=true npm install
+SKIP_BINARY_DOWNLOAD=true xfpm i xypriss
 ```
 
 ## Binary Distribution

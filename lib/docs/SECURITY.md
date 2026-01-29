@@ -116,12 +116,12 @@ const server = createServer({
 ```typescript
 app.get("/form", (req, res) => {
   const csrfToken = req.csrfToken();
-  res.xJson({ csrfToken });
+  res.json({ csrfToken });
 });
 
 app.post("/submit", (req, res) => {
   // CSRF token is automatically validated
-  res.xJson({ success: true });
+  res.json({ success: true });
 });
 ```
 
@@ -147,7 +147,7 @@ app.post("/api/user", (req, res) => {
     return res.status(400).json({ errors });
   }
 
-  res.xJson({ success: true, data: cleanData });
+  res.json({ success: true, data: cleanData });
 });
 ```
 
@@ -177,12 +177,16 @@ const server = createServer({
 });
 ```
 
-## Advanced Security with xypriss-security Module
-
 For enhanced security features:
 
 ```bash
-xfpm i xypriss-security
+xyp install xypriss-security
+```
+
+Alternatively, using npm:
+
+```bash
+npm install xypriss-security
 ```
 
 ```typescript
@@ -203,7 +207,7 @@ server.post("/api/register", async (req, res) => {
   // Generate secure tokens
   const token = generateSecureToken({ length: 32 });
 
-  res.xJson({ token });
+  res.json({ token });
 });
 ```
 

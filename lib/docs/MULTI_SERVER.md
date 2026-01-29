@@ -42,56 +42,7 @@ app.get("/api/users", (req, res) => res.xJson({ service: "api" }));
 app.get("/admin/dashboard", (req, res) => res.xJson({ service: "admin" }));
 
 // Start all servers with a simple API
-await app.startAllServers();
-```
-
-## Server Configuration Options
-
-Each server in the `servers` array can have:
-
-```typescript
-interface MultiServerConfig {
-  id: string; // Unique identifier
-  port: number; // Port number
-  host?: string; // Host (default: localhost)
-  routePrefix?: string; // Route prefix for this server
-  allowedRoutes?: string[]; // Route patterns to include
-
-  // Server-specific overrides
-  server?: {
-    autoPortSwitch?: boolean;
-    trustProxy?: boolean;
-  };
-
-  security?: {
-    level?: "basic" | "enhanced" | "maximum";
-    cors?: object;
-    rateLimit?: object;
-  };
-
-  cache?: {
-    strategy?: "memory" | "redis";
-    maxSize?: number;
-  };
-
-  performance?: {
-    clustering?: boolean;
-  };
-
-  fileUpload?: {
-    enabled?: boolean;
-    maxFileSize?: number;
-  };
-
-  responseControl?: {
-    enabled?: boolean;
-    statusCode?: number;
-    content?: string | object;
-    contentType?: string;
-    headers?: Record<string, string>;
-    handler?: (req: Request, res: Response) => void | Promise<void>;
-  };
-}
+await app.start();
 ```
 
 ## Use Cases
@@ -189,25 +140,10 @@ const app = createServer({
 ### Start All Servers
 
 ```typescript
-await app.startAllServers();
+await app.start();
 console.log("All servers started successfully");
 ```
 
-### Stop All Servers
-
-```typescript
-await app.stopAllServers();
-console.log("All servers stopped");
-```
-
-### Get Server Information
-
-```typescript
-const servers = app.getServerInfo();
-servers.forEach((server) => {
-  console.log(`${server.id}: http://${server.host}:${server.port}`);
-});
-```
 
 ## Route Distribution
 

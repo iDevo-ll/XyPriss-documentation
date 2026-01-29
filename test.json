@@ -2,7 +2,7 @@
   "$internal": {
     "$plg": {
       "__meta__": {
-        "path": "#$./plugin/directory" //
+        "path": "#$./plugin/directory"
       },
       "__xfs__": {
         "path": "$#./path/to/xfs/directory"

@@ -14,16 +14,14 @@ export const metadata: Metadata = {
   description:
     "Hybrid Rust + TypeScript framework bridging the power of Rust with the flexibility of Node.js. Built for performance, security, and scale.",
   icons: {
-    icon: "https://dll.nehonix.com/assets/xypriss/file_0000000083bc71f4998cbc2f4f0c9629.png",
-    shortcut:
-      "https://dll.nehonix.com/assets/xypriss/file_0000000083bc71f4998cbc2f4f0c9629.png",
-    apple:
-      "https://dll.nehonix.com/assets/xypriss/file_0000000083bc71f4998cbc2f4f0c9629.png",
+    icon: "/xypriss-logo.png",
+    shortcut: "/xypriss-logo.png",
+    apple: "/xypriss-logo.png",
   },
   openGraph: {
     title: "XyPriss Framework",
     description:
-      "The Hybrid Rust + Node.js Framework for High-Performance Web Apps",
+      "The Hybrid Rust + TypeScript Framework for High-Performance Web Apps",
     url: "https://xypriss.nehonix.com",
     siteName: "XyPriss Documentation",
     images: [

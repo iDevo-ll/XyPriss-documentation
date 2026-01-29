@@ -10,7 +10,16 @@ export interface SearchResult {
 }
 
 export function searchDocs(query: string): SearchResult[] {
-  const docs = getAllDocs();
+  const allDocs = getAllDocs();
+
+  // De-duplicate docs by normalized slug
+  const docsMap = new Map<string, Doc>();
+  allDocs.forEach((doc) => {
+    if (!docsMap.has(doc.slug)) {
+      docsMap.set(doc.slug, doc);
+    }
+  });
+  const docs = Array.from(docsMap.values());
 
   // Prepare data for Fuse
   const searchData = docs.map((doc) => {
@@ -44,14 +53,16 @@ export function searchDocs(query: string): SearchResult[] {
 
   const results = fuse.search(query);
 
-  return results.map((res) => {
+  return results.map((res: Fuse.FuseResult<any>) => {
     // Generate a snippet from the content match
     const content = res.item.content;
     let snippet = "";
 
     // 1. Try to get snippet from Fuse matches
     if (res.matches && res.matches.length > 0) {
-      const match = res.matches.find((m) => m.key === "content");
+      const match = res.matches.find(
+        (m: Fuse.FuseResultMatch) => m.key === "content",
+      );
       if (match && match.indices.length > 0) {
         const [start, end] = match.indices[0];
         const snippetStart = Math.max(0, start - 60);

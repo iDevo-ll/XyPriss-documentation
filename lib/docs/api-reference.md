@@ -292,18 +292,6 @@ const server = createServer({
   cluster: {
     enabled: true,
     workers: "auto", // Auto-detect CPU cores
-    autoScale: {
-      enabled: true,
-      minWorkers: 2,
-      maxWorkers: 8,
-      cpuThreshold: 80, // Scale up at 80% CPU
-      memoryThreshold: 85, // Scale up at 85% memory
-      scaleInterval: 30000, // Check every 30 seconds
-    },
-    gracefulShutdown: {
-      enabled: true,
-      timeout: 10000, // 10 seconds to finish requests
-    },
   },
 });
 ```
@@ -354,7 +342,7 @@ import {
   generateSecureToken,
   Hash,
   SecureRandom,
-  Validators, // install Fortify Schema instead (```bash npm i fortify-schema```)
+  Validators, // install Fortify Schema instead (```bash xfpm i fortify-schema```)
 } from "xypriss-security";
 
 // Advanced features
